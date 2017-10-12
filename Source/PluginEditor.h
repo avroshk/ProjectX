@@ -12,19 +12,10 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
+#include "DrawSpace.h"
 
 
 //==============================================================================
-/**
-*/
-
-//class DrawArea : public Component {
-//public:
-//    DrawArea();
-//    ~DrawArea();
-//    void paint(Graphics& g) override;
-//    void mouseDown(const MouseEvent& event) override;
-//};
 
 
 class ProjectXAudioProcessorEditor  : public AudioProcessorEditor, private Timer
@@ -43,9 +34,12 @@ private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     ProjectXAudioProcessor& processor;
+    
     bool midiState;
     int lastMidiNote;
     int x,y;
+
+    ScopedPointer<DrawSpace> drawSpace;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ProjectXAudioProcessorEditor)
 };

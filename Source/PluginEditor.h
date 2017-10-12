@@ -18,7 +18,7 @@
 //==============================================================================
 
 
-class ProjectXAudioProcessorEditor  : public AudioProcessorEditor, private Timer
+class ProjectXAudioProcessorEditor  : public AudioProcessorEditor, private Timer, public OpenGLRenderer
 {
 public:
     ProjectXAudioProcessorEditor (ProjectXAudioProcessor&);
@@ -29,17 +29,21 @@ public:
     void resized() override;
     void mouseDown(const MouseEvent& event) override;
     void timerCallback() override;
+    
+    //===============
+    void newOpenGLContextCreated() override {};
+    void renderOpenGL() override;
+    void openGLContextClosing() override {};
 
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     ProjectXAudioProcessor& processor;
+    OpenGLContext openGLContext;
     
     bool midiState;
     int lastMidiNote;
     int x,y;
-
-    ScopedPointer<DrawSpace> drawSpace;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ProjectXAudioProcessorEditor)
 };

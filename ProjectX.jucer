@@ -14,8 +14,6 @@
               companyName="BuriedUnderground" companyWebsite="http://avroshk.com">
   <MAINGROUP id="J3zBR5" name="ProjectX">
     <GROUP id="{2C838DEB-8431-470D-2445-6FC46F20DC6C}" name="Source">
-      <FILE id="jx04ND" name="DrawSpace.cpp" compile="1" resource="0" file="Source/DrawSpace.cpp"/>
-      <FILE id="F4JFOy" name="DrawSpace.h" compile="0" resource="0" file="Source/DrawSpace.h"/>
       <FILE id="FCaKxq" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="Ys5MQR" name="PluginProcessor.h" compile="0" resource="0"

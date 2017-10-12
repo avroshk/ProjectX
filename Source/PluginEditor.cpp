@@ -22,7 +22,16 @@ ProjectXAudioProcessorEditor::ProjectXAudioProcessorEditor (ProjectXAudioProcess
     startTimer(10);
     x=0; y=0;
     
-    drawSpace = new DrawSpace();
+#if JUCE_OPENGL
+    openGLContext.setRenderer(this);
+    openGLContext.setMultisamplingEnabled(true);
+    openGLContext.attachTo(*getTopLevelComponent());
+//    openGLContext.setContinuousRepainting(true);
+    
+    if (ComponentPeer* peer = getPeer())
+        peer->setCurrentRenderingEngine (0);
+#endif
+    
 }
 
 ProjectXAudioProcessorEditor::~ProjectXAudioProcessorEditor()
@@ -42,8 +51,7 @@ void ProjectXAudioProcessorEditor::paint (Graphics& g)
     g.setColour (Colours::white);
     g.setFont (25.0f);
     g.drawFittedText (std::to_string(lastMidiNote), getLocalBounds(), Justification::centred, 2);
-    
-    drawSpace->renderOpenGL();
+    renderOpenGL();
 }
 
 void ProjectXAudioProcessorEditor::resized()
@@ -60,6 +68,15 @@ void ProjectXAudioProcessorEditor::timerCallback() {
         lastMidiNote = processor.getLastMidiNote();
         repaint();
     }
+}
+
+void ProjectXAudioProcessorEditor::renderOpenGL() {
+    jassert (OpenGLHelpers::isContextActive());
+    
+    OpenGLHelpers::clear (Colours::white);
+    
+    glEnable (GL_BLEND);
+    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 
